@@ -1,5 +1,5 @@
 #![no_std]
-use gstd::{prelude::*,msg};
+use gstd::{prelude::*,msg, exec};
 use chronicles_io::PostAction;
 
 #[no_mangle]
@@ -14,10 +14,12 @@ extern "C" fn handle(){
     let message : PostAction = msg::load().expect("Unable to decode PostAction object");
     match message{
         PostAction::CreatePost(content) =>{
-            msg::reply(String::from("CreatePost"),0).expect("Error while sending reply");
+            //msg::reply(format!("{}", msg::source()),0).expect("Error while sending reply");
+            msg::reply(format!("Echo: {}", content),0).expect("Error while sending reply");
         },
         PostAction::DonateToPoster(ammount) =>{
             msg::reply(String::from("DonateToPoster"),0).expect("Error while sending reply");
+            exec::exit(msg::source());
         }
     }
 }
@@ -26,4 +28,11 @@ extern "C" fn handle(){
 extern "C" fn metahash(){
     let metahash : [u8; 32] = include!("../.metahash");
     msg::reply(metahash, 0).expect("Unable to share metahash");
+}
+
+
+#[no_mangle]
+extern "C" fn state() {
+    msg::reply("{\"field1\": 123 }",0).expect("Failed to share state");
+    //msg::reply(unsafe { WALLETS.clone() }, 0).expect("Failed to share state");
 }
