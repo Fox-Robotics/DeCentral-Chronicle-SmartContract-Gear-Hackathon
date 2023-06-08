@@ -1,10 +1,10 @@
 
-#![no_std]
+/*#![no_std]
 
 
 use gstd::{ActorId, Vec, prelude::*};
 
-
+#[metawasm]
 pub mod metafns {
     use chronicles_io::ChronicleMetadata;
     use gmeta::Metadata;
@@ -15,4 +15,4 @@ pub mod metafns {
     }
 
 
-}
+}*/

@@ -7,24 +7,25 @@ pub struct ChronicleMetadata;
 
 #[derive(Encode, Decode, TypeInfo, Debug)]
 pub enum PostAction{
-    CreatePost(String),
+    CreatePost(String, String),
     DonateToPoster(u32)
 }
 
 impl Metadata for ChronicleMetadata{
     type Init = ();
-    type Handle = InOut<PostAction, String>;
+    type Handle = InOut<PostAction, Vec<IoPost>>;
     type Reply = ();
     type Others =();
     type Signal = ();
-    type State = IoPost;
+    type State = Vec<IoPost>;
 }
 
 #[derive(Debug, Clone, Default, Encode, Decode, TypeInfo)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct IoPost {
-    pub contents: String,
-    pub donations_recipient : ActorId
+    pub title: String,
+    pub body: String,
+    pub poster_wallet : ActorId
 }
 
