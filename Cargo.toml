@@ -8,12 +8,10 @@ gstd = { git = "https://github.com/gear-tech/gear.git", features = ["debug"], re
 scale-info = { version = "2", default-features = false, features = ["derive"] }
 parity-scale-codec = { version = "3", default-features = false }
 chronicles-io = {path = "io"}
-chronicles-state = {path = "state"}
 
 [build-dependencies]
 gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", rev = "5c685d0f15c412ab6ee019ceaf7ce084426dfb68"}
 chronicles-io = {path = "io"}
-chronicles-state = {path = "state"}
 
 
 [dev-dependencies]
