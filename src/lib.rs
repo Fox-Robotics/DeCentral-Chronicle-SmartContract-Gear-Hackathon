@@ -28,8 +28,6 @@ extern "C" fn handle(){
             
             unsafe{POSTS.push(newPost)};
             msg::reply(unsafe{POSTS.clone()},0).expect("Failed to share state");
-            //msg::reply(format!("{}", msg::source()),0).expect("Error while sending reply");
-            //msg::reply(format!("Echo: {}", title),0).expect("Error while sending reply");
         },
         PostAction::DonateToPoster(ammount) =>{
             msg::reply(String::from("DonateToPoster"),0).expect("Error while sending reply");
@@ -48,6 +46,4 @@ extern "C" fn metahash(){
 #[no_mangle]
 extern "C" fn state() {
     msg::reply(unsafe{POSTS.clone()},0).expect("Failed to share state");
-    //msg::reply("{\"field1\": 123 }",0).expect("Failed to share state");
-    //msg::reply(unsafe { WALLETS.clone() }, 0).expect("Failed to share state");
 }
